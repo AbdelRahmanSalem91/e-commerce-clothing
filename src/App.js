@@ -1,22 +1,23 @@
-import "./App.css";
+import React from "react";
+
 import { Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
 import HomePage from "./pages/homePage/HomePage";
 import ShopPage from "./pages/shopPage/ShopPage";
 import SigninSignupPage from "./pages/signin-signup-page/signin-signup-page";
 import Header from "./components/header/Header";
-import React from "react";
+
 import { auth, createUser } from "./firebase/Firebase.util";
 import { onSnapshot } from "firebase/firestore";
+
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+
+import "./App.css";
+import Checkout from "./pages/checkout/Checkout";
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = { currentUser: null };
-  // }
-
   unsubscribeAuth = null;
 
   componentDidMount() {
@@ -48,6 +49,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route
             path="/signin"
             render={() =>
